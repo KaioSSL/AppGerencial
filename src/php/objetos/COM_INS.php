@@ -6,6 +6,7 @@
         private $ins_peso;
         private $ins_medida;
         private $ins_dat_cad;
+        private $ins_vlr_medida;
 
         function setInsCod($ins_cod){
             $this->ins_cod = $ins_cod;
@@ -21,6 +22,9 @@
         }
         function setInsDatCad($ins_dat_cad){
             $this->ins_dat_cad = $ins_dat_cad;
+        }
+        function setInsVlrMedida($ins_vlr_medida){
+            $this->ins_vlr_medida = $ins_vlr_medida;
         }
         
         function getInsCod(){
@@ -38,12 +42,15 @@
         function getInsDatCad(){
             return $this->ins_dat_cad;
         }
+        function getInsVlrMedida(){
+            return $this->ins_vlr_medida;
+        }
 
         function insertIns(){
             $BD = new BD();
-            $query = "INSERT INTO COM_INS(INS_DES,INS_PESO,INS_MEDIDA,INS_DAT_CAD) VALUES(?,?,?,CURDATE())";
+            $query = "INSERT INTO COM_INS(INS_DES,INS_PESO,INS_MEDIDA,INS_DAT_CAD,INS_VLR_MEDIDA) VALUES(?,?,?,CURDATE(),?)";
             $stmt = $BD->prepare_statement($query);
-            $stmt->bind_param('sds',$this->ins_des,$this->ins_peso,$this->ins_medida);
+            $stmt->bind_param('sdsd',$this->ins_des,$this->ins_peso,$this->ins_medida,$this->ins_vlr_medida);
             if($stmt->execute()){
                 $BD->disconnect();
                 return true;
@@ -54,9 +61,9 @@
         }
         function updateIns(){
             $BD = new BD();
-            $query = "UPDATE COM_INS SET INS_DES = ?, INS_PESO = ?, INS_MEDIDA = ? WHERE INS_COD = ?";
+            $query = "UPDATE COM_INS SET INS_DES = ?, INS_PESO = ?, INS_MEDIDA = ?, INS_VLR_MEDIDA =? WHERE INS_COD = ?";
             $stmt = $BD->prepare_statement($query);
-            $stmt->bind_param('sdsi',$this->ins_des,$this->ins_peso,$this->ins_medida,$this->ins_cod);
+            $stmt->bind_param('sdsdi',$this->ins_des,$this->ins_peso,$this->ins_medida,$this->ins_vlr_medida,$this->ins_cod);
             if($stmt->execute()){
                 $BD->disconnect();
                 return true;
