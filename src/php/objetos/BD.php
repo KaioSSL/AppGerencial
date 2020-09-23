@@ -3,10 +3,14 @@
         // As variaveis para conexão com o banco de dados
         private $host = "localhost";
         private $user = "root";
-        private $db = "SocialProject";
+        private $db = "AppGerencial";
         private $senha = "1234";
         //As variaveis que iremos utilizar na manipulação da conexão com o banco de dados
         private $link;
+
+        function getLink(){
+            return $this->link;
+        }
         
         function BD(){
             $this->connect();

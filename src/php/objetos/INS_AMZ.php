@@ -85,6 +85,5 @@
             $this->ins_qtd_disp = $qtd;
             $this->updateInsAmz();
         }
-        function getInsAmz(){}
     }
 ?>

@@ -48,7 +48,7 @@
 
         function insertIns(){
             $BD = new BD();
-            $query = "INSERT INTO COM_INS(INS_DES,INS_PESO,INS_MEDIDA,INS_DAT_CAD,INS_VLR_MEDIDA) VALUES(?,?,?,CURDATE(),?)";
+            $query = "INSERT INTO COM_INS(INS_DES,INS_PESO,INS_MEDIDA,INS_DAT_CAD,INS_VLR_MEDIDA) VALUES(?,?,?,CURRENT_DATE,?)";
             $stmt = $BD->prepare_statement($query);
             $stmt->bind_param('sdsd',$this->ins_des,$this->ins_peso,$this->ins_medida,$this->ins_vlr_medida);
             if($stmt->execute()){
@@ -63,7 +63,7 @@
             $BD = new BD();
             $query = "UPDATE COM_INS SET INS_DES = ?, INS_PESO = ?, INS_MEDIDA = ?, INS_VLR_MEDIDA =? WHERE INS_COD = ?";
             $stmt = $BD->prepare_statement($query);
-            $stmt->bind_param('sdsdi',$this->ins_des,$this->ins_peso,$this->ins_medida,$this->ins_vlr_medida,$this->ins_cod);
+            $stmt->bind_param('sdsd',$this->ins_des,$this->ins_peso,$this->ins_medida,$this->ins_vlr_medida,$this->ins_cod);
             if($stmt->execute()){
                 $BD->disconnect();
                 return true;
@@ -94,6 +94,15 @@
             }else{
                 return false;
             } 
+        }
+
+        function get_ins_last_id(){
+            $BD = new BD();
+            $query = "SELECT MAX(INS_COD) FROM COM_INS";
+            $stmt = $BD->prepare_statement($query);
+            $stmt->execute();
+            $rs = mysqli_fetch_array($stmt->get_result());
+            return $rs[0];
         }
     }
 ?>

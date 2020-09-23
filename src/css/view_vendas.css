@@ -1,6 +1,6 @@
 html{
     background: rgba(151, 211, 194, 0.44);
-
+    overflow: auto;
 }
 
 .div_filter{
@@ -39,7 +39,7 @@ html{
 .filter_input{
     font-size: 16px;
     margin: 10px;
-    width: 150px !important;
+    width: 170px !important;
 }
 
 .btn{
@@ -56,7 +56,7 @@ html{
 .btn:hover{
     background-color: #0583ab;
 }
-.sell_data{
+.table_data{
     width: 100%;
     min-height: 400px;
     background-color: 047092;
@@ -74,7 +74,50 @@ html{
     margin-bottom: 20px;
 }
 body{
-    overflow: auto;
     background-color: #FFFF;
     height: auto;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+.div_cadastro{
+    width: 100%;;
+    height: auto;
+    background-color: #F2F4F4;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+}
+.data_table {
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: normal;
+    font-family: sans-serif;
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+    background-color: white;
+}
+
+.data_table td, .fl-table th {
+    text-align: center;
+    padding: 8px;
+}
+
+.data_table td {
+    border-right: 1px solid #f8f8f8;
+    font-size: 12px;
+}
+.data_table thead th {
+    color: #ffffff;
+    background: #047092;
+}
+.data_table tr:hover{
+    background-color: #047092 !important;
+    color:white;
+}
+
+.data_table tr:nth-child(even) {
+    background: #F8F8F8;
 }

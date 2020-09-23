@@ -1,19 +1,9 @@
 <html>
     <head>
-        <title>Vendas</title>
+        <title>Vendas - Principal</title>
         <link rel="stylesheet" href="../css/view_vendas.css">
         <script src='../js/navBarController.js'></script>
-        <script>
-            function show_filter_body(){
-                if(document.getElementById('filter_body').style.display == "none"){
-                    document.getElementById('filter_body').style.display = "block";
-                    document.getElementById('filter_header').style.backgroundColor = 'rgb(242,244,244)';
-                }else{
-                    document.getElementById('filter_body').style.display = "none";
-                    document.getElementById('filter_header').style.backgroundColor = 'white';
-                }
-                ;
-            }            
+        <script>           
         </script>
         
     </head>
@@ -44,7 +34,7 @@
                 </form>
             </div>
         </div>
-        <div class='sell_data'>
+        <div class='table_data'>
             <div class='table'>
             </div>
         </div>
