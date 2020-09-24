@@ -17,6 +17,7 @@
                 <li class='nav_bar_li' id='a_insumos'><a class='nav_bar_a' href='insumos.php'>Insumos</a></li>
                 <li class='nav_bar_li' id='a_armazem'><a class='nav_bar_a' href='armazem.php'>Armazém</a></li>
                 <li class='nav_bar_li' id='a_relatorios'><a class='nav_bar_a' href='relatorios.php'>Relatórios</a></li>
+                <li class='nav_bar_li' id='a_relatorios'><a class='nav_bar_a' href='pessoas.php'>Pessoas</a></li>
             </ul>
         </nav>
     </body>

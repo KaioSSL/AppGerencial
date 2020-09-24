@@ -36,11 +36,11 @@
                 <spam class='filter_label'>Data Cadastro</spam>
                 <input type='text' name='AMZ_DAT_CAD' id='AMZ_DAT_CAD' class='filter_input' disabled> 
                 <spam class='filter_label'>Descrição</spam>
-                <input type='text' name='AMZ_DES' id='AMZ_DES' class='filter_input' >
+                <input type='text' name='AMZ_DES' id='AMZ_DES' class='filter_input' required>
                 <spam class='filter_label'>Endereço</spam>
-                <input type='text' name='AMZ_END' id='AMZ_END' class='filter_input'>
+                <input type='text' name='AMZ_END' id='AMZ_END' class='filter_input' required>
                 <spam class='filter_label'>Status</spam>
-                <select name='AMZ_STATUS' id='AMZ_STATUS' class='filter_input'>
+                <select name='AMZ_STATUS' id='AMZ_STATUS' class='filter_input' required>
                     <option value=1>Ativo</option>
                     <option value=0>Inativo</option>
                 </select>                

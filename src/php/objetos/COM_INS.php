@@ -63,7 +63,7 @@
             $BD = new BD();
             $query = "UPDATE COM_INS SET INS_DES = ?, INS_PESO = ?, INS_MEDIDA = ?, INS_VLR_MEDIDA =? WHERE INS_COD = ?";
             $stmt = $BD->prepare_statement($query);
-            $stmt->bind_param('sdsd',$this->ins_des,$this->ins_peso,$this->ins_medida,$this->ins_vlr_medida,$this->ins_cod);
+            $stmt->bind_param('sdsdi',$this->ins_des,$this->ins_peso,$this->ins_medida,$this->ins_vlr_medida,$this->ins_cod);
             if($stmt->execute()){
                 $BD->disconnect();
                 return true;
@@ -87,10 +87,10 @@
         }
         function getIns(){
             $BD = new BD();
-            $query = "  SELECT COM_INS.* FROM COM_INS";
+            $query = "SELECT COM_INS.* FROM COM_INS";
             $stmt = $BD->prepare_statement($query);
             if($stmt->execute()){
-                return mysqli_fetch_array($stmt->get_result());
+                return $stmt->get_result();
             }else{
                 return false;
             } 
@@ -103,6 +103,25 @@
             $stmt->execute();
             $rs = mysqli_fetch_array($stmt->get_result());
             return $rs[0];
+        }
+
+        function build_ins(){
+            $BD = new BD();
+            $query = "SELECT * FROM COM_INS WHERE INS_COD = ?";
+            $stmt = $BD->prepare_statement($query);
+            $stmt->bind_param('i',$this->ins_cod);
+            if($stmt->execute()){
+                $rs = mysqli_fetch_array($stmt->get_result());
+                $this->setInsDatCad($rs['INS_DAT_CAD']);
+                $this->setInsDes($rs['INS_DES']);
+                $this->setInsMedida($rs['INS_MEDIDA']);
+                $this->setInsPeso($rs['INS_PESO']);
+                $this->setInsVlrMedida($rs['INS_VLR_MEDIDA']);
+                return true;
+            }else{
+                return false;
+            }
+
         }
     }
 ?>

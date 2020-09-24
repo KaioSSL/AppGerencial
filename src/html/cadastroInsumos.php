@@ -16,11 +16,6 @@
             <form action='../php/controllers/insumoController.php' method='get'>
                 <spam class='filter_label'>Descrição</spam>
                 <input type='text' name='INS_DES' id='INS_DES' class='filter_input' required>
-                <spam class='filter_label'>Armazem</spam>
-                <?php 
-                    $amz = new CMN_AMZ();
-                    $amz->build_amz_select();
-                ?>
                 <spam class='filter_label'>Medida</spam>
                 <input type='text' name='INS_MEDIDA' id='INS_MEDIDA' class='filter_input' required>
                 <spam class='filter_label'>Valor Medida</spam>

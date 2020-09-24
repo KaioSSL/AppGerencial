@@ -15,7 +15,7 @@
                 var url = 'armazemController.php';
                 get_table_data(filtros,url);  
             };
-        function perfilAmz(cod,desc,end,dat_cad,status){
+        function perfilAmz(cod){
             location.href = 'armazemPerfil.php?'+'AMZ_COD='+cod
         }                     
                 
@@ -40,7 +40,7 @@
                 <spam class='filter_label'>Descrição</spam>
                 <input type='text' id='AMZ_DES' name='AMZ_DES' class='filter_input'>
                 <br>
-                <input type ='submit' class='btn' id='pesquisar' name='pesquisar' value='Pesquisar' onclick='get_data()'>
+                <input type ='button' class='btn' id='pesquisar' name='pesquisar' value='Pesquisar' onclick='get_data()'>
                 <input type='button' onclick='clean_filtro' value = 'Limpar' class='btn'>
 
             </div>

@@ -96,10 +96,30 @@
             $query = "SELECT CMN_PES.* FROM CMN_PES";
             $stmt = $BD->prepare_statement($query);
             if($stmt->execute()){
-                return mysqli_fetch_array($stmt->get_result());
+                return $stmt->get_result();
             }else{
                 return false;
             }            
+        }
+
+        function build_pes(){
+            $BD = new BD();
+            $query = "SELECT * FROM CMN_PES WHERE PES_COD = ?";
+            $stmt = $BD->prepare_statement($query);
+            $stmt->bind_param('i',$this->pes_cod);
+            if($stmt->execute()){
+                $rs = mysqli_fetch_array($stmt->get_result());
+                $this->setPesNome($rs['PES_NOME']);
+                $this->setPesTel($rs['PES_TEL']);
+                $this->setPesCpf($rs['PES_CPF']);
+                $this->setPesEnd($rs['PES_END']);
+                $this->setPesEma($rs['PES_EMA']);
+                $this->setPesDatCad($rs['PES_DAT_CAD']);
+                return true;
+            }else{
+                return false;
+            }
+
         }
         
 

@@ -1,6 +1,5 @@
 <?php
     include "BD.php";
-    include "FIN_BUY.php";
     class BUY_INS{
         private $buy_ins_cod;
         private $ins_cod;
