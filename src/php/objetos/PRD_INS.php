@@ -1,5 +1,5 @@
 <?php
-    include "BD.php";
+    include_once "BD.php";
 
     class PRD_INS{
         private $prd_ins_cod;

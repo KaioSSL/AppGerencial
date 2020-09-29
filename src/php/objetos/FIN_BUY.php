@@ -1,11 +1,12 @@
 <?php
-    include "BD.php";
+    include_once "BD.php";
     class FIN_BUY{
         private $buy_cod;
         private $buy_dat;
         private $buy_tot_vlr;
         private $buy_dat_cad;
         private $pes_cod_for;
+        private $amz_cod;
 
 
         function setBuyCod($buy_cod){
@@ -23,6 +24,9 @@
         function setPesCodFor($pes_cod_for){
             $this->pes_cod_for = $pes_cod_for;
         }
+        function setAmzCod($amz_cod){
+            $this->amz_cod = $amz_cod;
+        }
 
         function getBuyCod(){
             return $this->buy_cod;
@@ -39,12 +43,15 @@
         function getPesCodFor(){
             return $this->pes_cod_for;
         }
+        function getAmzCod(){
+            return $this->amz_cod;
+        }
 
         function insertBuy(){
             $BD = new BD();
-            $query = "INSERT INTO FIN_BUY(BUY_DAT,BUY_TOT_VLR,BUY_DAT_CAD) VALUES(?,?,CURDATE())";
+            $query = "INSERT INTO FIN_BUY(BUY_DAT,BUY_TOT_VLR,BUY_DAT_CAD,PES_COD_FOR,AMZ_COD) VALUES(?,?,CURRENT_DATE,?,?)";
             $stmt = $BD->prepare_statement($query);
-            $stmt->bind_param('sd',$this->buy_dat,$this->buy_tot_vlr);
+            $stmt->bind_param('sdii',$this->buy_dat,$this->buy_tot_vlr,$this->pes_cod_for,$this->amz_cod);
             if($stmt->execute()){
                 $BD->disconnect();
                 return true;
@@ -80,9 +87,9 @@
                 return false;
             }
         }
-        function getBuy($listParams){
+        function getBuy(){
             $BD = new BD();
-            $query = "  SELECT FIN_BUY.*
+            /*$query = "  SELECT FIN_BUY.*
                         FROM FIN_BUY,
                             BUY_INS,
                             INS_AMZ
@@ -101,13 +108,54 @@
                             AND (BUY_INS.INS_COD = ?
                             OR ? IS NULL)
                             AND (INS_AMZ.AMZ_COD = ?
-                            OR ? IS NULL)";
+                            OR ? IS NULL)";*/
+            $query ='SELECT * FROM	FIN_BUY';
             $stmt = $BD->prepare_statement($query);
-            $stmt->bind_param('issiii',$listParams[0],$listParams[1],$listParams[1],$listParams[2],$listParams[3],$listParams[4]);
+            
+            //$stmt->bind_param('issiii',$listParams[0],$listParams[1],$listParams[1],$listParams[2],$listParams[3],$listParams[4]);
             if($stmt->execute()){
-                return mysqli_fetch_array($stmt->get_result());
+                return $stmt->get_result();
             }else{
                 return false;
+            }
+        }
+        function get_last_id(){
+            $BD = new BD();
+            $query = "SELECT MAX(BUY_COD) FROM FIN_BUY";
+            $stmt = $BD->prepare_statement($query);
+            if($stmt->execute()){
+                $rs = mysqli_fetch_array($stmt->get_result());
+                return $rs[0];
+            }else{
+                return false;
+            }
+        }
+
+        function build_buy(){
+            $BD = new BD();
+            $query = "SELECT * FROM FIN_BUY WHERE BUY_COD = ? ";
+            $stmt = $BD->prepare_statement($query);
+            $stmt->bind_param('i',$this->buy_cod);
+            if($stmt->execute()){
+                $rs = mysqli_fetch_array($stmt->get_result());
+                $this->setBuyDat($rs['BUY_DAT']);
+                $this->setBuyDatCad($rs['BUY_DAT_CAD']);
+                $this->setBuyTotVlr($rs['BUY_TOT_VLR']);
+                $this->setPesCodFor($rs['PES_COD_FOR']);
+                $this->setAmzCod($rs['AMZ_COD']);
+                return true;
+            }
+        }
+
+        function get_buy_itens(){
+            $BD = new BD();
+            $query = "SELECT * FROM BUY_INS,COM_INS WHERE BUY_COD = ? AND BUY_INS.INS_COD = COM_INS.INS_COD ";
+            $stmt = $BD->prepare_statement($query);
+            $stmt->bind_param('i',$this->buy_cod);
+            if($stmt->execute()){
+                return $stmt->get_result();
+            }else{
+                false;
             }
         }
     }

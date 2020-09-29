@@ -1,5 +1,5 @@
 <?php
-    include "BD.php";
+    include_once "BD.php";
     class CMN_PES{
         private $pes_cod;
         private $pes_cpf;
@@ -120,8 +120,7 @@
                 return false;
             }
 
-        }
-        
+        }       
 
     }
 

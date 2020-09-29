@@ -85,5 +85,18 @@
             }
             echo "</select>";
         }*/
+
+        function build_select($selectName,$query,$columnId,$columnDes){
+            $stmt = $this->prepare_statement($query);
+            $stmt->execute();
+            $rs = $stmt->get_result();
+            $select='';
+            $select.='<select id="'.$selectName.'" name="'.$selectName.'" class="filter_input" required>';
+            while($result = mysqli_fetch_array($rs)){
+                $select.='<option value='.$result[$columnId].'>'.$result[$columnDes].'</option>';
+            }
+            $select.='</select>';
+            echo $select;
+        }
     }
 ?>

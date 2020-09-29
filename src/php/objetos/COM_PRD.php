@@ -1,5 +1,5 @@
 <?php
-    include "BD.php";
+    include_once "BD.php";
     class COM_PRD{
         private $prd_cod;
         private $prd_vlr_venda;

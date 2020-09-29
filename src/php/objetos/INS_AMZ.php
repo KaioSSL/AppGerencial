@@ -1,5 +1,5 @@
 <?php
-    include "BD.php";
+    include_once "BD.php";
     class INS_AMZ{
         private $ins_amz_cod;
         private $ins_qtd_disp;
@@ -36,14 +36,15 @@
             $BD = new BD();
             $query = "INSERT INTO INS_AMZ(INS_QTD_DISP,INS_COD,AMZ_COD) VALUES (?,?,?)";
             $stmt = $BD->prepare_statement($query);
-            $stmt->bind_param('dii',$this->ins_qtd_disp,$this->ins_cod,$this->amz_cod);
-            if($stmt->execute()){
+            $stmt->bind_param('iii',$this->ins_qtd_disp,$this->ins_cod,$this->amz_cod);
+            $stmt->execute();
+            /*if($stmt->execute()){
                 $BD->disconnect();
                 return true;
             }else{
                 $BD->disconnect();
                 return false;
-            }
+            }*/
         }
         function updateInsAmz(){
             $BD = new BD();
@@ -71,19 +72,48 @@
                 return false;
             }
         }
-        function buInsAmz($qtd,$op){
+        function buInsAmz(){
             $BD = new BD();
-            $query = "SELECT INS_QTD__DISP FROM INS_AMZ WHERE INS_AMZ_COD = ?";
+            $query = "SELECT INS_QTD_DISP FROM INS_AMZ WHERE INS_COD = ? AND AMZ_COD = ?";
             $stmt = $BD->prepare_statement($query);
+            $stmt->bind_param('ii',$this->ins_cod,$this->amz_cod);
             $stmt->execute();
             $rs = mysqli_fetch_array($stmt->get_result());
-            if($op == 0){
-                $qtd = $rs[0] + $qtd;
-            }else{
-                $qtd = $rs[0] - $qtd;
-            }
+            $qtd = $rs['INS_QTD_DISP'] + $this->ins_qtd_disp;            
             $this->ins_qtd_disp = $qtd;
-            $this->updateInsAmz();
+            $query = "UPDATE INS_AMZ SET INS_QTD_DISP = ? WHERE INS_COD = ? AND AMZ_COD =?";
+            $stmt = $BD->prepare_statement($query);
+            $stmt->bind_param('iii',$this->ins_qtd_disp,$this->ins_cod,$this->amz_cod);
+            $stmt->execute();
+        }
+
+        function exists_ins_amz(){
+            $BD = new BD();
+            $query = "SELECT INS_AMZ_COD FROM INS_AMZ WHERE INS_COD = ? AND AMZ_COD = ?";
+            $stmt = $BD->prepare_statement($query);
+            $stmt->bind_param('ii',$this->ins_cod,$this->amz_cod);
+            $stmt->execute();
+            $rows = mysqli_num_rows($stmt->get_result());   
+            if($rows>0){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        function get_ins_amz_cod(){
+            $BD = new BD();
+            $query = "SELECT INS_AMZ_COD FROM INS_AMZ WHERE INS_COD = ? AND AMZ_COD = ?";
+            $stmt = $BD->prepare_statement($query);
+            $stmt->bind_param('ii',$this->ins_cod,$this->amz_cod);
+            if($stmt->execute()){
+                $rs = mysqli_fetch_array($stmt->get_result());
+                return $rs['INS_AMZ_COD'];
+            }else{
+                return false;
+            }
+            
+            
+            
         }
     }
 ?>

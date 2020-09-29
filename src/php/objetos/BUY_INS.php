@@ -1,10 +1,11 @@
 <?php
-    include "BD.php";
+    include_once "BD.php";
     class BUY_INS{
         private $buy_ins_cod;
         private $ins_cod;
         private $buy_cod;
         private $ins_amz_cod;
+        private $ins_qtd;
 
         function setBuyInsCod($buy_ins_cod){
             $this->buy_ins_cod = $buy_ins_cod;
@@ -17,6 +18,9 @@
         }
         function setInsAmzCod($ins_amz_cod){
             $this->ins_amz_cod = $ins_amz_cod;
+        }
+        function setInsQtd($ins_qtd){
+            $this->ins_qtd = $ins_qtd;
         }
 
         function getBuyInsCod(){
@@ -31,12 +35,15 @@
         function getInsAmzCod(){
             return $this->ins_amz_cod;
         }
-
+        function getInsQtd(){
+            return $this->ins_qtd;
+        }
+        
         function insertBuyIns(){
             $BD = new BD();
-            $query = "INSERT INTO BUY_INS(INS_COD,BUY_COD,INS_AMZ_COD) VALUES (?,?,?)";
+            $query = "INSERT INTO BUY_INS(INS_COD,BUY_COD,INS_AMZ_COD,INS_QTD) VALUES (?,?,?,?)";
             $stmt = $BD->prepare_statement($query);
-            $stmt->bind_param('iii',$this->ins_cod,$this->buy_cod,$this->ins_amz_cod);
+            $stmt->bind_param('iiii',$this->ins_cod,$this->buy_cod,$this->ins_amz_cod,$this->ins_qtd);
             if($stmt->execute()){
                 $BD->disconnect();
                 return true;

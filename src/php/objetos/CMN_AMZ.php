@@ -1,5 +1,5 @@
 <?php
-    include "BD.php";
+    include_once "BD.php";
     class CMN_AMZ{
         private $amz_cod;
         private $amz_des;
@@ -104,21 +104,6 @@
             }else{
                 return false;
             }
-        }
-
-        function build_amz_select(){
-            $BD = new BD();
-            $query = "SELECT * FROM CMN_AMZ";
-            $stmt = $BD->prepare_statement($query);
-            $stmt->execute();
-            $rs = $stmt->get_result();
-            $select='';
-            $select.='<select id="AMZ_SELECT" name="AMZ_SELECT" class="filter_input">';
-            while($result = mysqli_fetch_array($rs)){
-                $select.='<option value='.$result['AMZ_COD'].'>'.$result['AMZ_DES'].'</option>';
-            }
-            $select.='</select>';
-            echo $select;
         }
     }
 

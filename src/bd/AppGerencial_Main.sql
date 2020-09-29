@@ -18,6 +18,18 @@ CREATE SCHEMA IF NOT EXISTS `AppGerencial` DEFAULT CHARACTER SET utf8 ;
 USE `AppGerencial` ;
 
 -- -----------------------------------------------------
+-- Table `AppGerencial`.`CMN_AMZ`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `AppGerencial`.`CMN_AMZ` (
+  `AMZ_COD` INT NOT NULL AUTO_INCREMENT,
+  `AMZ_DES` VARCHAR(45) NOT NULL,
+  `AMZ_END` VARCHAR(45) NOT NULL,
+  `AMZ_DAT_CAD` DATETIME NOT NULL,
+  `AMZ_STATUS` INT NOT NULL,
+  PRIMARY KEY (`AMZ_COD`))
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
 -- Table `AppGerencial`.`CMN_PES`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AppGerencial`.`CMN_PES` (
@@ -41,10 +53,16 @@ CREATE TABLE IF NOT EXISTS `AppGerencial`.`FIN_BUY` (
   `BUY_TOT_VLR` DOUBLE NOT NULL,
   `BUY_DAT_CAD` DATETIME NOT NULL,
   `PES_COD_FOR` INT NOT NULL,
+  `AMZ_COD` INT NOT NULL,
   PRIMARY KEY (`BUY_COD`),
   CONSTRAINT `fk_FIN_BUY_CMN_PES1`
     FOREIGN KEY (`PES_COD_FOR`)
     REFERENCES `AppGerencial`.`CMN_PES` (`PES_COD`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_FIN_BUY_CMN_AMZ1`
+    FOREIGN KEY (`AMZ_COD`)
+    REFERENCES `AppGerencial`.`CMN_AMZ` (`AMZ_COD`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -57,25 +75,11 @@ CREATE TABLE IF NOT EXISTS `AppGerencial`.`COM_INS` (
   `INS_COD` INT NOT NULL AUTO_INCREMENT,
   `INS_DES` VARCHAR(45) NOT NULL,
   `INS_PESO` FLOAT NOT NULL,
-  `INS_MEDIDA` VARCHAR(45) NOT NULL,
+  `INS_MEDIDA` DOUBLE NOT NULL,
   `INS_DAT_CAD` DATETIME NOT NULL,
   `INS_VLR_MEDIDA` DOUBLE NOT NULL,
   PRIMARY KEY (`INS_COD`))
 ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `AppGerencial`.`CMN_AMZ`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AppGerencial`.`CMN_AMZ` (
-  `AMZ_COD` INT NOT NULL AUTO_INCREMENT,
-  `AMZ_DES` VARCHAR(45) NOT NULL,
-  `AMZ_END` VARCHAR(45) NOT NULL,
-  `AMZ_DAT_CAD` DATETIME NOT NULL,
-  `AMZ_STATUS` INT NOT NULL,
-  PRIMARY KEY (`AMZ_COD`))
-ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `AppGerencial`.`INS_AMZ`
@@ -108,7 +112,6 @@ CREATE TABLE IF NOT EXISTS `AppGerencial`.`BUY_INS` (
   `BUY_COD` INT NOT NULL,
   `INS_AMZ_COD` INT NOT NULL,
   `INS_QTD` INT NOT NULL,
-  `INS_VALIDADE` DATETIME NOT NULL,
   PRIMARY KEY (`BUY_INS_COD`),
   CONSTRAINT `fk_BUY_INS_COM_INS`
     FOREIGN KEY (`INS_COD`)

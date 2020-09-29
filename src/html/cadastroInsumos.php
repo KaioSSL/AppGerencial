@@ -1,6 +1,3 @@
-<?php
-    include '../php/objetos/CMN_AMZ.php';
-?>
 <html>
     <head>
         <title>Cadastro - Insumo</title>
@@ -17,10 +14,14 @@
                 <spam class='filter_label'>Descrição</spam>
                 <input type='text' name='INS_DES' id='INS_DES' class='filter_input' required>
                 <spam class='filter_label'>Medida</spam>
-                <input type='text' name='INS_MEDIDA' id='INS_MEDIDA' class='filter_input' required>
+                <select id='INS_MEDIDA' name='INS_MEDIDA' class='filter_input'>
+                    <option value='0'>Grama</option>
+                    <option value='1'>Quilo</option>
+                    <option value='2'>Militro</option>
+                    <option value='3'>Litro</option>
+                </select>
                 <spam class='filter_label'>Valor Medida</spam>
                 <input type='text' name='INS_VLR_MEDIDA' id='INS_VLR_MEDIDA' class='filter_input' required>
-                <br>
                 <spam class='filter_label'>Peso</spam>
                 <input type='text' name='INS_PESO' id='INS_PESO' class='filter_input' required>
                 <br>

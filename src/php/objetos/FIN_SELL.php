@@ -1,5 +1,5 @@
 <?php
-    include "BD.php";
+    include_once "BD.php";
     class FIN_SELL{
         private $sell_cod;
         private $sell_tot_vlr;

@@ -1,5 +1,5 @@
 <?php
-    include "BD.php";
+    include_once "BD.php";
     class COM_INS{
         private $ins_cod;
         private $ins_des;
@@ -50,7 +50,7 @@
             $BD = new BD();
             $query = "INSERT INTO COM_INS(INS_DES,INS_PESO,INS_MEDIDA,INS_DAT_CAD,INS_VLR_MEDIDA) VALUES(?,?,?,CURRENT_DATE,?)";
             $stmt = $BD->prepare_statement($query);
-            $stmt->bind_param('sdsd',$this->ins_des,$this->ins_peso,$this->ins_medida,$this->ins_vlr_medida);
+            $stmt->bind_param('sddd',$this->ins_des,$this->ins_peso,$this->ins_medida,$this->ins_vlr_medida);
             if($stmt->execute()){
                 $BD->disconnect();
                 return true;
@@ -63,7 +63,7 @@
             $BD = new BD();
             $query = "UPDATE COM_INS SET INS_DES = ?, INS_PESO = ?, INS_MEDIDA = ?, INS_VLR_MEDIDA =? WHERE INS_COD = ?";
             $stmt = $BD->prepare_statement($query);
-            $stmt->bind_param('sdsdi',$this->ins_des,$this->ins_peso,$this->ins_medida,$this->ins_vlr_medida,$this->ins_cod);
+            $stmt->bind_param('sdddi',$this->ins_des,$this->ins_peso,$this->ins_medida,$this->ins_vlr_medida,$this->ins_cod);
             if($stmt->execute()){
                 $BD->disconnect();
                 return true;
