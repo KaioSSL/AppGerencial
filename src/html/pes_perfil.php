@@ -1,4 +1,7 @@
 <?php
+    include_once('../php/objetos/Authentication.php');
+    $aut = new Authentication();
+    $aut->authenticate_login();
     include '../php/objetos/CMN_PES.php';
     $pes = new CMN_PES();
     $pes->setPesCod($_REQUEST['PES_COD']);

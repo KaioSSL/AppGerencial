@@ -1,3 +1,8 @@
+<?php
+    include_once('../php/objetos/Authentication.php');
+    $aut = new Authentication();
+    $aut->authenticate_login();
+?>
 <html>
     <head>
         <title>Cadastro - Pessoa</title>

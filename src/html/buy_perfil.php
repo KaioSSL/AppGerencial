@@ -1,4 +1,7 @@
 <?php
+    include_once('../php/objetos/Authentication.php');
+    $aut = new Authentication();
+    $aut->authenticate_login();
     include "../php/objetos/BD.php";
     include "../php/objetos/FIN_BUY.php";
     $buy = new FIN_BUY();

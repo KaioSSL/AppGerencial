@@ -1,5 +1,7 @@
 <?php
-    
+    include_once('../php/objetos/Authentication.php');
+    $aut = new Authentication();
+    $aut->authenticate_login();
     include '../php/objetos/COM_INS.php';
     $ins = new COM_INS();
     $ins->setInsCod($_REQUEST['INS_COD']);

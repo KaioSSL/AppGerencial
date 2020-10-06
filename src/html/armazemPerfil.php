@@ -1,4 +1,7 @@
 <?php
+    include_once('../php/objetos/Authentication.php');
+    $aut = new Authentication();
+    $aut->authenticate_login();
     include '../php/objetos/CMN_AMZ.php';
     $amz = new CMN_AMZ();
     $amz->setAmzCod($_REQUEST['AMZ_COD']);
