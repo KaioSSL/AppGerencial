@@ -13,7 +13,7 @@
                 $_SESSION['LOGIN'] = $user->getLogin();
                 $_SESSION['ROLE'] =  $user->getRole();
                 $_SESSION['LOGGED'] =  true;
-                header('location:../../html/armazem.php');
+                header('location:../../html/inicial.php');
             }else{
                 echo "<script>window.location.href = '../../html/login.php';
                 alert('LOGIN INCORRETO');</script>"; 
