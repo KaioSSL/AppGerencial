@@ -18,8 +18,14 @@
                 <li class='nav_bar_li' id='a_armazem'><a class='nav_bar_a' href='armazem.php'>Armazém</a></li>
                 <li class='nav_bar_li' id='a_relatorios'><a class='nav_bar_a' href='relatorios.php'>Relatórios</a></li>
                 <li class='nav_bar_li' id='a_relatorios'><a class='nav_bar_a' href='pessoas.php'>Pessoas</a></li>
-                <li class='nav_bar_li' id='a_relatorios'><a class='nav_bar_a' href='users.php'>Usuários</a></li>
+                <?php 
+                    session_start();
+                    if($_SESSION['ROLE']==1){
+                        echo "<li class='nav_bar_li' id='a_relatorios'><a class='nav_bar_a' href='users.php'>Usuários</a></li>";
+                    }
+                 ?>
                 <li class='nav_bar_li' id='a_relatorios'><a class='nav_bar_a' href='../php/controllers/loginController.php?LOGOUT=1'>Logout</a></li>
+                
             </ul>
         </nav>
     </body>
